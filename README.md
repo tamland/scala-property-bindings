@@ -34,18 +34,21 @@ a bind b
 
 ### Functions
 Any Observable and Property can be bound to functions. This means that whenever the property changes the function is called with the new value as argument. This is similar to Qt's signal/slot system.
+
 ```scala
 observe(a) { x =>
   println(x)
 }
 a() = 3
 ```
+
 Prints "3"
 
 
 ### Factory methods
 Using the factory method `bind` and `observes` is generally preferred because this guaranties it initially holds the correct value.
 This method creates a new property binds in bidirectional with given Property.
+
 ```scala
 val a = Property(1)
 val b = bind(a)
@@ -55,10 +58,13 @@ val c = observes(b)
 ### Swing integration
 #### Binding to swing properties
 When dealing with language level properties, factory method `observes` can be used. It takes an Observable and a function, bind them and returns the Observable's current value. Example:
+
 ```scala
 val label = new Label {
   text = observes(model.text, text_=)
-}```
+}
+```
+
 By passing the setter of property `text`, it will be unidirectionally bound to `model.text` and act as a normal `Property`.
 
 
